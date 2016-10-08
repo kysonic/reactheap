@@ -1,7 +1,6 @@
 // System modules
 const path = require('path');
 // Webpack tools
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
@@ -9,8 +8,9 @@ const validate = require('webpack-validator');
 const configs = require('./configs');
 // Package
 const pkg = require('./package.json');
-
-
+// ENV target
+const TARGET = process.env.npm_lifecycle_event;
+process.env.BABEL_ENV = TARGET;
 /**
  * Our base paths
  * @type {{app: *, build: *}}
@@ -19,9 +19,10 @@ const PATHS = {
 	app: path.join(__dirname, 'app'),
 	build: path.join(__dirname, 'build'),
 	style: [
-			path.join(__dirname, 'app', 'main.scss'),
-			/*path.join(__dirname, 'node_modules', 'purecss-sass')*/
-		]
+			path.join(__dirname, 'app', 'stylesheets', 'main.scss'),
+			path.join(__dirname, 'node_modules', 'purecss-sass')
+		],
+	images: path.join(__dirname,'app','images')
 };
 /**
  * Common configurations
@@ -43,7 +44,12 @@ const common = {
 				test: /\.(jpg|png)$/,
 				loader: 'file?name=[path][name].[hash].[ext]',
 				include: PATHS.images
-			}
+			},
+			{
+				test: /\.(js|jsx)?$/,
+				loaders: ['babel?cacheDirectory'],
+				include: PATHS.app
+			},
 		]
 	},
 	plugins: [
@@ -57,7 +63,7 @@ const common = {
 var config;
 
 // Detect npm scripts names to define required configurations
-switch(process.env.npm_lifecycle_event) {
+switch(TARGET) {
 	case 'build':
 	case 'stats':
 		config = merge(common,
@@ -88,7 +94,7 @@ switch(process.env.npm_lifecycle_event) {
 			{
 				devtool: 'eval-source-map'
 			},
-			configs.stylesConfig.setupCSS(PATHS.app),
+			configs.stylesConfig.setupCSS([PATHS.app,path.join(__dirname, 'node_modules', 'purecss-sass')]),
 			configs.devServer({
 				// Customize host/port here if needed
 				host: process.env.HOST || '127.0.0.1',
