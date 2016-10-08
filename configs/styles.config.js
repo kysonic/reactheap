@@ -2,7 +2,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack-plugin');
 
 /**
- * Css configuration
+ * SCSS configuration
  * @param paths to be included in project
  */
 module.exports.setupCSS = function(paths) {
@@ -19,7 +19,7 @@ module.exports.setupCSS = function(paths) {
 	};
 }
 /**
- * Manage CSS files to build production version
+ * Manage SCSS files to build production version
  * @param paths
  * @returns {{module: {loaders: *[]}, plugins: *[]}}
  */
