@@ -1,3 +1,10 @@
+@import '_vars';
+@import 'App';
+
 body {
-  background: linen;
+  background: $backgroundColor;
+  font-size: $baseFontSize;
+  font-family: $baseFont;
 }
+
+

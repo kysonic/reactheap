@@ -1,0 +1,12 @@
+@import '_vars';
+@import 'Notes';
+
+.App {
+  padding: 20px;
+  .add-note {
+    background-color: $buttonBackgroundColor;
+    border: 1px solid $borderColor;
+    width: 30px;
+    height: 30px;
+  }
+}

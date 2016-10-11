@@ -5,11 +5,11 @@ import uuid from 'uuid';
 const notes = [
 	{
 		id: uuid.v4(),
-		task: 'Learn React'
+		task: 'Make something good'
 	},
 	{
 		id: uuid.v4(),
-		task: 'Do laundry'
+		task: 'Make something bad'
 	}
 ];
 
@@ -17,16 +17,7 @@ export default class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			notes: [
-				{
-					id: uuid.v4(),
-					task: 'Learn React'
-				},
-				{
-					id: uuid.v4(),
-					task: 'Do laundry'
-				}
-			]
+			notes: notes
 		};
 	}
 	addNote = ()=>{
@@ -71,8 +62,9 @@ export default class App extends React.Component {
 	render(){
 		const {notes} = this.state;
 		return (
-			<div>
-				<button onClick={this.addNote}>+</button>
+			<div className="App">
+				<button className="add-note" onClick={this.addNote}>+</button>
+				<br/>
 				<Notes
 					notes={notes}
 					onNoteClick={this.activateNoteEdit}
