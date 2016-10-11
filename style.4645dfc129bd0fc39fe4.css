@@ -1,5 +1,11 @@
+.App {
+  padding: 20px;
+}
+
 body {
-  background: linen;
+  background: #e8ffec;
+  font-size: 16px;
+  font-family: Helvetica sans-sarif;
 }
 
 /*!
@@ -957,4 +963,4 @@ https://github.com/yahoo/pure/blob/master/LICENSE.md
 .pure-table-horizontal tbody>tr:last-child>td {
   border-bottom-width: 0;
 }
-/*# sourceMappingURL=style.b4c6a767c1f4dfe3be34.css.map*/
+/*# sourceMappingURL=style.4645dfc129bd0fc39fe4.css.map*/
