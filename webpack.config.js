@@ -1,7 +1,6 @@
 // System modules
 const path = require('path');
 // Webpack tools
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 // Parts
@@ -22,13 +21,14 @@ const PATHS = {
 			path.join(__dirname, 'app', 'stylesheets', 'main.scss'),
 			path.join(__dirname, 'node_modules', 'purecss-sass')
 		],
-	images: path.join(__dirname,'app','images')
+	images: path.join(__dirname,'app','images'),
+	test: path.join(__dirname, 'tests')
 };
 /**
  * Common configurations
  * @type {{entry: {style: Array, app: *}, output: {path: *, filename: string}, devtool: string, module: {loaders: *[]}, plugins: *[]}}
  */
-const common = {
+const common = merge({
 	entry: {
 		style: PATHS.style,
 		app: PATHS.app
@@ -37,27 +37,16 @@ const common = {
 		path: PATHS.build,
 		filename: '[name].js'
 	},
-	devtool: 'source-map',
-	module: {
-		loaders: [
-			{
-				test: /\.(jpg|png)$/,
-				loader: 'file?name=[path][name].[hash].[ext]',
-				include: PATHS.images
-			},
-			{
-				test: /\.(js|jsx)?$/,
-				loaders: ['babel?cacheDirectory'],
-				include: PATHS.app
-			},
-		]
-	},
-	plugins: [
-		new HtmlWebpackPlugin({
-			title: 'React heap.'
-		})
-	]
-}
+	devtool: 'source-map'
+},
+	configs.assets.html({
+		title: 'Kanban demo',
+		appMountId: 'app'
+	}),
+	configs.assets.images(PATHS.images),
+	configs.react.loadJSX(PATHS.app),
+	configs.test.lintJSX(PATHS.app)
+)
 
 
 var config;
@@ -88,6 +77,16 @@ switch(TARGET) {
 			configs.production.minify()
 		);
 		break;
+	case 'test':
+		config = merge(
+			common,
+			{
+				devtool: 'inline-source-map'
+			},
+			configs.react.loadIsparta(PATHS.app),
+			configs.react.loadJSX(PATHS.test)
+		);
+		break;
 	default:
 		config = merge(
 			common,
@@ -99,7 +98,9 @@ switch(TARGET) {
 				// Customize host/port here if needed
 				host: process.env.HOST || '127.0.0.1',
 				port: process.env.PORT || '8080'
-			})
+			}),
+			configs.react.enableReactPerformanceTools(),
+			configs.assets.npmInstall()
 		);
 }
 
