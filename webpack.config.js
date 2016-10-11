@@ -18,8 +18,7 @@ const PATHS = {
 	app: path.join(__dirname, 'app'),
 	build: path.join(__dirname, 'build'),
 	style: [
-			path.join(__dirname, 'app', 'stylesheets', 'main.scss'),
-			path.join(__dirname, 'node_modules', 'purecss-sass')
+			path.join(__dirname, 'app', 'stylesheets', 'main.scss')
 		],
 	images: path.join(__dirname,'app','images'),
 	test: path.join(__dirname, 'tests')
@@ -73,7 +72,7 @@ switch(TARGET) {
 				entries: Object.keys(pkg.dependencies)
 			}),
 			configs.stylesConfig.extractCSS(PATHS.app),
-			configs.stylesConfig.purifyCSS([PATHS.app]),
+			/*configs.stylesConfig.purifyCSS([PATHS.app]),*/
 			configs.production.minify()
 		);
 		break;

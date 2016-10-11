@@ -1,10 +1,12 @@
-@import '_vars';
-@import 'App';
+@import 'vars.scss';
+@import 'components/_App.scss';
 
 body {
   background: $backgroundColor;
   font-size: $baseFontSize;
   font-family: $baseFont;
 }
+
+
 
 

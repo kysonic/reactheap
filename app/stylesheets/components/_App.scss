@@ -1,5 +1,5 @@
-@import '_vars';
-@import 'Notes';
+@import '../vars.scss';
+@import './_Notes.scss';
 
 .App {
   padding: 20px;
@@ -10,3 +10,5 @@
     height: 30px;
   }
 }
+
+
