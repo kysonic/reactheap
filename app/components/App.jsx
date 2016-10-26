@@ -1,36 +1,37 @@
 import React from 'react';
-import Lanes from './Lanes.jsx';
-// Libs
+import connect from 'connect-alt';
 import uuid from 'uuid';
-import connect from '../libs/connect.jsx';
-import {compose} from 'redux';
-import {DragDropContext} from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-// Actions
-import LaneActions from '../actions/LaneActions.js';
 
-const App = ({LaneActions,lanes})=>{
-	const addLane = ()=>{
-		LaneActions.create({
+import Todos from './Todos.jsx';
+import TodoActions from '../actions/TodoActions.js';
+
+@connect('todo')
+class App extends React.Component {
+	static propTypes = { todoStore: React.PropTypes.object.isRequired }
+	addTodo(){
+		TodoActions.create({
 			id: uuid.v4(),
-			name: 'New lane'
+			task: 'New task'
 		});
 	}
-
-	return (
-		<div>
-			<button className="add-lane" onClick={addLane}>+</button>
-			<Lanes lanes={lanes} />
-		</div>
-	);
+	removeTodo(id){
+		TodoActions.delete(id);
+	}
+	updateTodo(id,task){
+		TodoActions.update({id, task, editing: false});
+	}
+	activateEditing(id) {
+		TodoActions.update({id, editing: true});
+	}
+	render() {
+		const { todoStore: {todos} } = this.props;
+		return (
+			<Todos todos={todos} onCreate={this.addTodo} onDelete={this.removeTodo} onActivateEditing={this.activateEditing} onEdit={this.updateTodo} />
+		);
+	}
 }
 
+export default App;
 
-export default compose(
-	DragDropContext(HTML5Backend),
-	connect(({lanes}) => ({
-		lanes
-	}), {
-		LaneActions
-	})
-)(App)
+
+

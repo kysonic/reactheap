@@ -5,6 +5,7 @@
   ],
   "plugins": [
      "transform-object-rest-spread",
+     "transform-decorators-legacy",
      "babel-plugin-transform-class-properties"
   ],
   "env": {

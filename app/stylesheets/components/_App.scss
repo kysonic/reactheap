@@ -1,15 +1,8 @@
 @import '../vars.scss';
-@import './_Notes.scss';
-@import './_Lane.scss';
+@import './_Todo.scss';
 
 .App {
   padding: 20px;
-  .add-note {
-    background-color: $buttonBackgroundColor;
-    border: 1px solid $borderColor;
-    width: 30px;
-    height: 30px;
-  }
 }
 
 
