@@ -39,7 +39,7 @@ const common = merge({
 	devtool: 'source-map'
 },
 	configs.assets.html({
-		title: 'Kanban demo',
+		title: 'Todo app',
 		appMountId: 'app'
 	}),
 	configs.assets.images(PATHS.images),
