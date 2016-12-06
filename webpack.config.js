@@ -18,7 +18,7 @@ const PATHS = {
 	app: path.join(__dirname, 'app'),
 	build: path.join(__dirname, 'build'),
 	style: [
-			path.join(__dirname, 'app', 'stylesheets', 'main.scss')
+			path.join(__dirname, 'app', 'styles', 'style.styl')
 		],
 	images: path.join(__dirname,'app','images'),
 	test: path.join(__dirname, 'tests')

@@ -10,8 +10,8 @@ module.exports.setupCSS = function(paths) {
 		module: {
 			loaders: [
 				{
-					test: /\.scss$/,
-					loaders: ['style', 'css', 'sass'],
+					test: /\.styl$/,
+					loaders: ['style', 'css', 'stylus'],
 					include: paths
 				}
 			]
@@ -30,7 +30,7 @@ module.exports.extractCSS = function(paths) {
 				test: /\.scss$/,
 				loader: ExtractTextPlugin.extract(
 					"style",
-					"css!sass")
+					"css!styl")
 			}]
 		},
 		plugins: [
