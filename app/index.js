@@ -1,14 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import {render} from "react-dom";
+import {Router,Route,IndexRoute,browserHistory} from "react-router";
 
-import App from './components/App.jsx';
+import {Provider} from "react-redux";
 
-import Provider from './components/Provider';
+import App from "./components/App.jsx";
+import Grid from "./components/Grid.jsx";
+import Single from "./components/Single.jsx";
 
+import store, {history} from "./store";
 
-ReactDOM.render(
+const router = (
+    <Provider store={store} >
+        <Router history={history}>
+            <Route path="/" component={App}>
+                <IndexRoute component={Grid} />
+                <Route path="/view/:postId" component={Single}></Route>
+            </Route>
+        </Router>
+    </Provider>
+);
 
-	<Provider><App /></Provider>,
-
-	document.getElementById('app')
+render(
+	router,
+	document.getElementById("app")
 );

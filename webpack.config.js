@@ -28,16 +28,16 @@ const PATHS = {
  * @type {{entry: {style: Array, app: *}, output: {path: *, filename: string}, devtool: string, module: {loaders: *[]}, plugins: *[]}}
  */
 const common = merge({
-	entry: {
-		style: PATHS.style,
-		app: PATHS.app
+		entry: {
+			style: PATHS.style,
+			app: PATHS.app
+		},
+		output: {
+			path: PATHS.build,
+			filename: '[name].js'
+		},
+		devtool: 'source-map'
 	},
-	output: {
-		path: PATHS.build,
-		filename: '[name].js'
-	},
-	devtool: 'source-map'
-},
 	configs.assets.html({
 		title: 'Todo app',
 		appMountId: 'app'

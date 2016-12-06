@@ -28,6 +28,7 @@ module.exports.html = function(options) {
 		plugins: [
 			new HtmlWebpackPlugin({
 				template: require('html-webpack-template'),
+				baseHref: '/',
 				title: options.title,
 				appMountId: options.appMountId,
 				inject: false
