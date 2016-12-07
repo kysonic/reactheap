@@ -17,9 +17,7 @@ process.env.BABEL_ENV = TARGET;
 const PATHS = {
 	app: path.join(__dirname, 'app'),
 	build: path.join(__dirname, 'build'),
-	style: [
-			path.join(__dirname, 'app', 'styles', 'style.styl')
-		],
+	style: [path.join(__dirname, 'app', 'styles', 'style.styl')],
 	images: path.join(__dirname,'app','images'),
 	test: path.join(__dirname, 'tests')
 };

@@ -4,6 +4,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as actionCreators from "../actions/actionCreators";
 
+
 function mapStateToProps(state){
 	return {
 		posts: state.posts,

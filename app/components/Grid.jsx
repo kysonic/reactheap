@@ -6,7 +6,7 @@ class Grid extends React.Component {
 	render(){
         return (
             <div className="photo-grid">
-                {this.props.posts.map((post,i)=><Photo post={post} comments={this.props.comments} key={i}></Photo>)}
+                {this.props.posts.map((post,i)=><Photo post={post} increaseLikes={this.props.increment} comments={this.props.comments} index={i} key={i}></Photo>)}
             </div>
         )
     }

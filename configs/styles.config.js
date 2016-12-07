@@ -2,7 +2,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack-plugin');
 
 /**
- * SCSS configuration
+ * Styl configuration
  * @param paths to be included in project
  */
 module.exports.setupCSS = function(paths) {
@@ -19,7 +19,7 @@ module.exports.setupCSS = function(paths) {
 	};
 }
 /**
- * Manage SCSS files to build production version
+ * Manage Styl files to build production version
  * @param paths
  * @returns {{module: {loaders: *[]}, plugins: *[]}}
  */
@@ -27,11 +27,8 @@ module.exports.extractCSS = function(paths) {
 	return {
 		module: {
 			loaders: [{
-				test: /\.scss$/,
-				loader: ExtractTextPlugin.extract(
-					"style",
-					"css!styl")
-			}]
+				test: /\.styl$/,
+				loader: ExtractTextPlugin.extract("style-loader", "css-loader!stylus-loader")}]
 		},
 		plugins: [
 			new ExtractTextPlugin('[name].[chunkhash].css')
